@@ -12,19 +12,11 @@
 <a name="style_guide"></a>
 ## 代码规范
 
-### 1. [Objective-C](https://github.com/WithoutEvil/objective-c-style-guide)
-### 2. [Swift](https://github.com/WithoutEvil/swift-style-guide)
+###  [Objective-C](https://github.com/TransfarMobile/Objective-C-Style-Guide/blob/master/objective-c-style-guide-zh.md)
 
 <a name="project_architecture"></a>
 ## 项目架构
-```
-flow
-nt=>operation: 网络层
-dt=>operation: 数据层
-rp=>operation: 表示层
-nt->dt->rp
 
-```
 <a name="tools"></a>
 ## 工具
 

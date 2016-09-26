@@ -5,8 +5,6 @@
 * [代码规范](#style_guide)
 * [项目架构(MVC)](#project_architecture)
 * [工具](#tools)
-* [引用第三方开源项目](#quote_third_OSS)
-* [深入研究文档](#deep_research_document)
 
 
 <a name="style_guide"></a>
@@ -14,8 +12,31 @@
 
 ###  [Objective-C](https://github.com/TransfarMobile/Objective-C-Style-Guide/blob/master/objective-c-style-guide-zh.md)
 
+##常见业务规范
+开发中出现的常见业务场景的处理方式，我们从更好的封装性，可读性，扩展性，和更高的开发效率出发，来做一些规范。  
+
+###属性变量
+除非在init方法中，否则永远使用getter方法来初始化属性变量。
+###自定义UITableViewCell
+1. 不要把新的自定义UITableViewCell的代码写在其他的文件中，使用新建文件的方式，来创建你的自定义UITableViewCell。
+
+2. Cell的属性定义为私有属性，公有属性场景很少，如果真的有，先检查下你的设计是否需要改进。
+3. Cell属性的定义和初始化等方式，依然遵循上文中的代码规范。
+
+4. 给Cell声明一个公开的方法用来配置Cell的内容，而不是直接调用Cell的属性，在外面配置。
+5. Cell的SubView的action target应该是Cell本身。将所有的action response直接写在Cell的内
+部。
+
+6. 用delegate的方式把事件回调出去，通常一个delegate方法即可，使用枚举来区分event类型。不要使用block来回调，这样会造成cellForRowAtIndex里面灾难性的代码堆砌，更不利用调试。
+
+
+
 <a name="project_architecture"></a>
 ## 项目架构
+###网络层
+###登录系统
+###本地存储
+###第三方库 (json to model 网络状态UI)
 
 <a name="tools"></a>
 ## 工具
@@ -37,84 +58,3 @@ https://ruby-china.org/topics/15737
 * Git分支管理是一门艺术
 http://roclinux.cn/?p=2129
 
-
-<a name="quote_third_OSS"></a>
-## 引用第三方开源项目
-
-###1. submodule
-引用第三方开源项目的一种方式
-#### 如何checkout相关的submodule的代码  
-
-`checkout submodule project source:`  
-
-1. `git submodule init`: initialize your local configuration file 
-
-2. `git submodule update`: fetch all the data and check out the appropriate commit listed in your superproject
-
-#### add an existing Git repository as a submodule of the repository that we’re working on
-
-1. `git submodule add https://github.com/demo/demo`
-
-摘自: https://git-scm.com/book/en/v2/Git-Tools-Submodules
-
-###2. cocoapods
-引用第三方开源项目的一种方式
-
-Search for pods (above). Then list the dependencies in a text file named Podfile in your Xcode project directory:
-
-```
-platform :ios, '8.0'
-use_frameworks!
-
-target 'MyApp' do
-  pod 'AFNetworking', '~> 2.6'
-  pod 'ORStackView', '~> 3.0'
-  pod 'SwiftyJSON', '~> 2.3'
-end
-```
-
-Tip: CocoaPods provides a `pod init` command to create a Podfile with smart defaults.   
-####1. Now you can install the dependencies in your project:
-```shell
-$ pod install
-```
-####2. Make sure to always open the Xcode workspace instead of the project file when building your project:
-```shell
-$ open App.xcworkspace
-```
-####3. Now you can import your dependencies e.g.:
-```shell
-Now you can import your dependencies e.g.:
-```
-摘自: https://cocoapods.org/ 中 `GET STARTED`
-
-[我们将`Pods`目录加入版本控制](https://guides.cocoapods.org/using/using-cocoapods.html#should-i-check-the-pods-directory-into-source-control)
-
-
-
-> **最后我们鼓励使用优秀的第三方开源项目，但如果对第三方开源项目不了解，原理没搞懂，除非是公认的优秀开源项目，否则禁止在项目中使用**
-
-###3. Carthage
-引用第三方开源项目的一种方式
-
-[Carthage](https://github.com/Carthage/Carthage) is a decentralized dependency
-manager for Cocoa application.
-
-To integrate `Demo` with Carthage, add this to your `Cartfile`:
-
-```ruby
-git "git@demo.com:iOS/Demo.git" ~> 0.1.2
-```
-
-Run `carthage update` to build the framework and drag the built
-`Demo.framework` into your Xcode project (as well as embed it in your target
-    if necessary).
-
-<a name="deep_research_document"></a>
-## 深入研究文档
-
-> 无论你学习哪些方面的新知识，你真的需要深入学习他们的文档从而以它正确的方式来使用它。人们往往不做功课就过快地或错误地采取某种解决方案，从而陷入非常被动的局面。
-
-## License
-
-iOS-Architecture is released under the MIT license. See LICENSE for details.
